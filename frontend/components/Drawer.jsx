@@ -29,8 +29,20 @@ export default function Drawer({ children }) {
       >
         <button onClick={toggleDrawer}>&times;</button>
         {/* Links */}
-        <Link href="/collaboration-hub" className="block" >
-            Collaboration Hub
+        <Link href="/geo-maps" className="block" >
+            Geospatial Mapping
+        </Link>
+
+        <Link href="/dashboard" className="block" >
+            Document Repo
+        </Link>
+
+        <Link href="/dashboard" className="block" >
+            Dashboard
+        </Link>
+
+        <Link href="/dashboard" className="block" >
+            Dashboard
         </Link>
 
       </div>
