@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { MdDriveFolderUpload } from "react-icons/md";
 
 import Drawer from "@/components/Drawer";
 import Documents from "@/components/Documents";
@@ -52,9 +53,35 @@ export default function DocumentRepo() {
   return (
     <Drawer>
     <div className="container mx-auto p-4">
-      <form onSubmit={handleSubmit} className="mb-4">
-        <input type="file" onChange={handleFileChange} className="mb-2" />
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+      <div className="flex justify-center text-2xl text-black mb-4">
+      <h1 className="text-center font-semibold">Document Repository</h1>
+      <MdDriveFolderUpload className="pt-3 text-2xl"/>
+      </div>
+
+      <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center md:mx-48 mb-4 glassmorphism">
+        
+        <input 
+         type="text"
+         placeholder="Document title"
+         className="text-center text-black border-2 border-gray-300 rounded w-64 p-2 mb-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+         />
+
+        <select
+          className="text-center text-black border-2 border-gray-300 rounded w-64 p-2 mb-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+          >
+          <option value="0">Select category</option>
+          <option value="1">Category 1</option>
+          <option value="2">Category 2</option>
+          <option value="3">Category 3</option>
+          </select>
+
+
+        <input
+         type="file" 
+         onChange={handleFileChange} 
+         className="mb-2 bg-gray-500 py-1 px-2 rounded-md" />
+
+        <button type="submit" className="bg-green-500 text-white w-max px-4 py-2 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
           Upload Document
         </button>
       </form>
