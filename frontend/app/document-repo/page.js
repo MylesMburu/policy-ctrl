@@ -2,10 +2,6 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { MdDriveFolderUpload } from "react-icons/md";
-
-import Drawer from "@/components/Drawer";
-import Documents from "@/components/Documents";
 
 export default function DocumentRepo() {
   const [file, setFile] = useState(null);
@@ -51,6 +47,7 @@ export default function DocumentRepo() {
   };
 
   return (
+
     <Drawer>
     <div className="container mx-auto p-4">
       <div className="flex justify-center text-2xl text-black mb-4">
@@ -96,5 +93,6 @@ export default function DocumentRepo() {
       </div>
     </div>
     </Drawer>
+
   );
 }
