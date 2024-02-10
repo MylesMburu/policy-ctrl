@@ -23,7 +23,7 @@ export default function Drawer({ children }) {
 
       {/* Drawer */}
       <div
-        className={`absolute z-20 h-full bg-gray-800 text-white w-64 space-y-6 py-7 px-2 transform ${
+        className={`absolute z-20 h-full bg-gray-800 text-black w-64 space-y-6 py-7 px-2 transform ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } transition-transform duration-200 ease-in-out`}
       >
@@ -50,17 +50,18 @@ export default function Drawer({ children }) {
       {/* Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
-        <header className="flex justify-between items-center p-4 bg-green-700">
+        <header className="flex justify-between items-center p-4 ">
         {/* Icon  to toggle the drawer */}
         <button onClick={toggleDrawer} className="focus:outline-none px-3 py-1">
             <span><GiHamburgerMenu /></span> 
         </button>
 
-        <h1 className="text-xl text-center flex-1">Policy CTRL</h1>
+        <h1 className="text-xl text-start font-extrabold  flex-1">PCTRL</h1>
 
-        <Link href="/logout" className="bg-black rounded-md px-3 py-1 hover:bg-white hover:text-black focus:outline-none">
+        <Link href="/logout" className="bg-black text-white rounded-md px-3 py-1 hover:bg-sky-600 hover:text-black focus:outline-none">
             Logout
         </Link>
+        
         </header>
 
         {/* Main content */}
