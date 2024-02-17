@@ -13,7 +13,7 @@ export default function Drawer({ children }) {
     <div className="flex h-screen bg-gray-100">
       {/* Drawer */}
       <div
-        className={`z-50 h-full bg-gray-800 w-64 space-y-6 py-7 px-2 transform ${
+        className={`z-50 h-full bg-gray-800 w-64 space-y-6 py-7 px-2 absolute transform ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } transition-transform duration-200 ease-in-out`}
       >
@@ -38,7 +38,7 @@ export default function Drawer({ children }) {
       </div>
 
       {/* Content */}
-      <div className={`flex flex-1 flex-col overflow-hidden  transition-margin duration-200 ease-in-out`}>
+      <div className={`flex flex-1 flex-col overflow-hidden transition-margin duration-200 ease-in-out ${isOpen ? 'ml-64' : 'ml-0'}`}>
         {/* Header */}
         <header className="flex justify-between items-center p-4 bg-green-700">
           {/* Icon to toggle the drawer */}
