@@ -2,6 +2,11 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { MdDriveFolderUpload } from "react-icons/md";
+
+import Drawer from "@/components/Drawer";
+import Documents from "@/components/Documents";
+
 
 export default function DocumentRepo() {
   const [file, setFile] = useState(null);
@@ -33,12 +38,13 @@ export default function DocumentRepo() {
     // Add any additional metadata fields here
 
     try {
-      const response = await axios.post('/upload-document', formData, {
+      const response = await axios.post('http://localhost:3001/upload-document', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
       console.log(response.data);
+      alert('Document uploaded successfully');
       // Fetch documents again to update the list
       fetchDocuments();
     } catch (error) {

@@ -1,8 +1,6 @@
-import React from 'react';
-import { MdDriveFolderUpload } from "react-icons/md";
+'use client'
 
 import Drawer from "@/components/Drawer";
-import Documents from "@/components/Documents";
 import {MapContainer, TileLayer}from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import{ Bar, Line} from 'react-chartjs-2';
@@ -63,9 +61,9 @@ const options = {
 // const center =[10.771278605629783, 106.69012489341263];
 export default function page() {
   return (
-    <div>
+    
       <Drawer>
-    <div className="container">
+    <div className="container text-black">
     {/* Maps and charts */}
       <div className="flex m-2">
         <div className="flex-2 w-3/5 shadow-lg">
@@ -144,6 +142,6 @@ export default function page() {
 </div>      
       
   </Drawer>
-    </div>
+    
   )
 }
