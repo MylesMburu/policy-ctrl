@@ -12,6 +12,7 @@ export default function DocumentRepo() {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
   const [file, setFile] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [documents, setDocuments] = useState([]);
 
   useEffect(() => {
@@ -36,10 +37,12 @@ export default function DocumentRepo() {
     e.preventDefault();
 
     const formData = new FormData();
+    //Add any metadata to the form data
     formData.append('document', file);
     formData.append('title', title);
     formData.append('category', category);
-    // Add any additional metadata fields here
+
+    setIsLoading(true);
 
     try {
       const response = await axios.post('http://localhost:3001/upload-document', formData, {
@@ -53,6 +56,9 @@ export default function DocumentRepo() {
       fetchDocuments();
     } catch (error) {
       console.error(error);
+    }
+    finally {
+      setIsLoading(false);
     }
   };
 
@@ -92,9 +98,10 @@ export default function DocumentRepo() {
          onChange={handleFileChange} 
          className="mb-2 bg-gray-500 py-1 px-2 rounded-md" />
 
-        <button type="submit" className="bg-green-500 text-white w-max px-4 py-2 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-          Upload Document
+        <button type="submit" className="bg-green-500 text-white w-max px-4 py-2 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" disabled={isLoading}>
+          {isLoading ? 'Uploading...' : 'Upload Document'}
         </button>
+
       </form>
       <div className="grid grid-cols-1 gap-4">
           {documents.map((document) => (
