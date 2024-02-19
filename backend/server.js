@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const fileUpload = require('express-fileupload');
 const AWS = require('aws-sdk');
+const cors = require('cors');
+const Document = require('./models');
 
 const app = express();
 require('dotenv').config();
@@ -10,6 +12,7 @@ require('dotenv').config();
 // Middleware
 app.use(bodyParser.json());
 app.use(fileUpload());
+app.use(cors()); 
 
 // AWS S3 Configuration
 const s3 = new AWS.S3({
@@ -34,7 +37,6 @@ app.post('/upload-document', async (req, res) => {
         Bucket: process.env.AWS_S3_BUCKET_NAME,
         Key: `documents/${Date.now()}_${file.name}`,
         Body: file.data,
-        ACL: 'public-read'
       }).promise();
   
       // Save document metadata in MongoDB
