@@ -9,6 +9,8 @@ import Documents from "@/components/Documents";
 
 
 export default function DocumentRepo() {
+  const [title, setTitle] = useState('');
+  const [category, setCategory] = useState('');
   const [file, setFile] = useState(null);
   const [documents, setDocuments] = useState([]);
 
@@ -19,7 +21,7 @@ export default function DocumentRepo() {
 
   const fetchDocuments = async () => {
     try {
-      const response = await axios.get('/documents');
+      const response = await axios.get('http://localhost:3001/documents');
       setDocuments(response.data);
     } catch (error) {
       console.error(error);
@@ -35,6 +37,8 @@ export default function DocumentRepo() {
 
     const formData = new FormData();
     formData.append('document', file);
+    formData.append('title', title);
+    formData.append('category', category);
     // Add any additional metadata fields here
 
     try {
@@ -66,10 +70,14 @@ export default function DocumentRepo() {
         <input 
          type="text"
          placeholder="Document title"
+         value={title}
+         onChange={(e) => setTitle(e.target.value)}
          className="text-center text-black border-2 border-gray-300 rounded w-64 p-2 mb-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
          />
 
         <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
           className="text-center text-black border-2 border-gray-300 rounded w-64 p-2 mb-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
           >
           <option value="0">Select category</option>
@@ -89,14 +97,23 @@ export default function DocumentRepo() {
         </button>
       </form>
       <div className="grid grid-cols-1 gap-4">
-        {Documents.map((document) => (
-          <div key={document.id} className="bg-gray-100 p-4 rounded shadow mx-24">
-            <h3 className="font-semibold text-black">{document.name}</h3>
-            <p className="text-sm text-gray-500">Uploaded on {new Date(document.uploadedAt).toLocaleDateString()}</p>
-            {/* Display other metadata as needed */}
-          </div>
-        ))}
-      </div>
+          {documents.map((document) => (
+            <div key={document._id} className="bg-gray-100 p-4 rounded shadow mx-24"> {/* Use _id for the key if it's MongoDB's default */}
+              <h3 className="font-semibold text-black">{document.title}</h3>
+              <p className="text-sm text-gray-500">Category: {document.category}</p>
+              <p className="text-sm text-gray-500">Uploaded on {new Date(document.uploadedAt).toLocaleDateString()}</p>
+              {/* Download Button */}
+              <a
+                href={document.s3Url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+              >
+                Download
+              </a>
+            </div>
+          ))}
+        </div>
     </div>
     </Drawer>
 
