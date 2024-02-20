@@ -63,40 +63,63 @@ export default function DocumentRepo() {
   };
 
   return (
-  <Drawer>
-    <div className="container">
-    {/* Maps and charts */}
-      <div className="flex m-2">
-        <div className="flex-2 w-3/5 shadow-lg z-0">
-          <div className="flex">
-            <h4 className=" font-bold ">Geographical Distribution</h4>
-            <div className="ml-auto mr-3 mb-2" >
-              <select class="px-2 py-1 border-solid border-blue-600 border-2 rounded-full">
-                <option>select country</option>
-              </select>
-            </div>
-          </div>
-          <MapContainer 
-            center={center}
-            zoom={2}
-            style={{ height: '70vh'}}
+
+    <Drawer>
+    <div className="container mx-auto p-4">
+      <div className="flex justify-center text-2xl text-black mb-4">
+      <h1 className="text-center font-semibold">Document Repository</h1>
+      <MdDriveFolderUpload className="pt-3 text-2xl"/>
+      </div>
+
+      <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center md:mx-48 mb-4 glassmorphism">
+        
+        <input 
+         type="text"
+         placeholder="Document title"
+         value={title}
+         onChange={(e) => setTitle(e.target.value)}
+         className="text-center text-black border-2 border-gray-300 rounded w-64 p-2 mb-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+         />
+
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="text-center text-black border-2 border-gray-300 rounded w-64 p-2 mb-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
           >
-            <TileLayer 
-              url="https://api.maptiler.com/maps/basic-v2/256/{z}/{x}/{y}.png?key=rjwVCuekcbZL7Q43APim"
-              attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
-            />
-          </MapContainer>
-        </div>
-        <div className="w-2/5 m-3 shadow-2xl">
-              <h4 className="my-2 font-bold text-center">CHART REPRESENTATION</h4>
-            <div className="mr-auto  mb-2" >
-              
-              <Line data={data} options={options} height={250}/>
-              
-                  
-              </div>
+          <option value="0">Select category</option>
+          <option value="1">Category 1</option>
+          <option value="2">Category 2</option>
+          <option value="3">Category 3</option>
+          </select>
+
+
+        <input
+         type="file" 
+         onChange={handleFileChange} 
+         className="mb-2 bg-gray-500 py-1 px-2 rounded-md" />
+
+        <button type="submit" className="bg-green-500 text-white w-max px-4 py-2 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" disabled={isLoading}>
+          {isLoading ? 'Uploading...' : 'Upload Document'}
+        </button>
+
+      </form>
+      <div className="grid grid-cols-1 gap-4">
+          {documents.map((document) => (
+            <div key={document._id} className="bg-gray-100 p-4 rounded shadow mx-24"> {/* Use _id for the key if it's MongoDB's default */}
+              <h3 className="font-semibold text-black">{document.title}</h3>
+              <p className="text-sm text-gray-500">Category: {document.category}</p>
+              <p className="text-sm text-gray-500">Uploaded on {new Date(document.uploadedAt).toLocaleDateString()}</p>
+              {/* Download Button */}
+              <a
+                href={document.s3Url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+              >
+                Download
+              </a>
             </div>
-          ))&rbrace;
+          ))}
         </div>
     </div>
     </Drawer>
