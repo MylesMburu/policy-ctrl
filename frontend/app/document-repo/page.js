@@ -1,63 +1,67 @@
 'use client';
 
-import Drawer from "@/components/Drawer";
-import {MapContainer, TileLayer}from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import{ Bar, Line} from 'react-chartjs-2';
-import { Chart } from 'chart.js/auto';
-Chart.register({ // Register linear scale
-  id: 'linear',
-  type: 'linear',
-  position: 'left', // 'left' for vertical axis, 'bottom' for horizontal axis
-});
-const center =[10.771278605629783, 106.69012489341263];
-const data = {
-  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-  datasets: [
-    {
-      label: 'Natural phenomeno graph',
-      data: [12, 19, 3, 5, 2, 3],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
-      ],
-      borderWidth: 2,
-    },
-  ],
-};
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { MdDriveFolderUpload } from "react-icons/md";
 
-// Options for the bar graph
-const options = {
-  scales: {
-    y: {
-      beginAtZero: true,
-    },
-    x: {
-      grid: {
-          display: false // Remove x-axis grid lines
-      }
-  },
-  y: {
-      grid: {
-          display: false // Remove y-axis grid lines
-      }
-  }
-    
-  },
-};
+import Drawer from "@/components/Drawer";
+import Documents from "@/components/Documents";
+
+
 export default function DocumentRepo() {
+  const [title, setTitle] = useState('');
+  const [category, setCategory] = useState('');
+  const [file, setFile] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [documents, setDocuments] = useState([]);
+
+  useEffect(() => {
+    // Fetch documents when component mounts
+    fetchDocuments();
+  }, []);
+
+  const fetchDocuments = async () => {
+    try {
+      const response = await axios.get('http://localhost:3001/documents');
+      setDocuments(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    //Add any metadata to the form data
+    formData.append('document', file);
+    formData.append('title', title);
+    formData.append('category', category);
+
+    setIsLoading(true);
+
+    try {
+      const response = await axios.post('http://localhost:3001/upload-document', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log(response.data);
+      alert('Document uploaded successfully');
+      // Fetch documents again to update the list
+      fetchDocuments();
+    } catch (error) {
+      console.error(error);
+    }
+    finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
   <Drawer>
     <div className="container">
@@ -92,52 +96,10 @@ export default function DocumentRepo() {
                   
               </div>
             </div>
-        <div className="w-1/5 m-3">
-          <h4 className="font-bold text-center p-4">NATURAL PHENOMENO</h4><hr/>
-          <div className="flex-col px-4 shadow-xl">
-            <div className="m-4 p-2 flex"><input type="checkbox" className="mx-2"/><div className="ml-auto"> <h5 className="ml-auto">flood</h5> </div></div>
-            <div className="m-4 p-2 flex"><input type="checkbox" className="mx-2"/> <div className="ml-auto"> <h5 className="ml-auto">flood</h5> </div></div>
-            <div className="m-4 p-2 flex"><input type="checkbox" className="mx-2"/> <div className="ml-auto"> <h5 className="ml-auto">flood</h5> </div></div>
-            <div className="m-4 p-2 flex"><input type="checkbox" className="mx-2"/> <div className="ml-auto"> <h5 className="ml-auto">flood</h5> </div></div>
-            <div className="m-4 p-2 flex"><input type="checkbox" className="mx-2"/> <div className="ml-auto"> <h5 className="ml-auto">flood</h5> </div></div>
-            <div className="m-4 p-2 flex"><input type="checkbox" className="mx-2"/> <div className="ml-auto"> <h5 className="ml-auto">flood</h5> </div></div>
-          </div>
+          ))}
         </div>
-      </div>
-      {/* end of Maps and charts */}
-      {/* policy and others */}
+    </div>
+    </Drawer>
 
-      <div className="flex m-4">
-        <div className="w-3/5 shadow-lg mr-4 shadow-sky-700">
-        <h4 className="my-2 font-bold text-center">SUMMARY OF DISASTERS</h4> <hr/>
-          <div className="flex">
-          
-          <div className="flex-1 m-4 border-b-4 border-solid py4 border-indigo-500 bg-white">
-            <h5>FLood</h5>
-          </div>
-          <div className="flex-1 bg-white">
-            <h5>FLood</h5>
-          </div>
-          <div className="flex-1 bg-white">
-            <h5>FLood</h5>
-          </div>
-          </div>
-        </div>
-        <div className="w-2/5">
-        <h4 className="my-2 font-bold text-center">TOP 10 AFFECTED COUNTRIES</h4> <hr/>
-        <div className="m-4 p-2 flex"><div className="ml-auto"> <h5 className="ml-auto">Somalia</h5> </div></div>
-        <div className="m-4 p-2 flex"><div className="ml-auto"> <h5 className="ml-auto">Algeria</h5> </div></div>
-        <div className="m-4 p-2 flex"><div className="ml-auto"> <h5 className="ml-auto">Greenland</h5> </div></div>
-        <div className="m-4 p-2 flex"><div className="ml-auto"> <h5 className="ml-auto">Sudan</h5> </div></div>
-        <div className="m-4 p-2 flex"><div className="ml-auto"> <h5 className="ml-auto">Egypt</h5> </div></div>
-        <div className="m-4 p-2 flex"><div className="ml-auto"> <h5 className="ml-auto">DRC</h5> </div></div>
-        <div className="m-4 p-2 flex"><div className="ml-auto"> <h5 className="ml-auto">Nigeria</h5> </div></div>
-        <div className="m-4 p-2 flex"><div className="ml-auto"> <h5 className="ml-auto">Cameroon</h5> </div></div>
-        </div>
-      </div>
-      {/* end policy and others */}
-</div>      
-      
-  </Drawer>
   );
 }
