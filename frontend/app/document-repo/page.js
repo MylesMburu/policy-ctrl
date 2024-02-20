@@ -96,7 +96,7 @@ export default function DocumentRepo() {
                   
               </div>
             </div>
-          ))}
+          ))&rbrace;
         </div>
     </div>
     </Drawer>
