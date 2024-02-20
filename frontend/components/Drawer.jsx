@@ -23,7 +23,7 @@ export default function Drawer({ children }) {
 
       {/* Drawer */}
       <div
-        className={`absolute z-20 h-full bg-gray-800 text-black w-64 space-y-6 py-7 px-2 transform ${
+        className={`absolute z-20 h-full bg-gray-800  text-black w-64 space-y-6 py-7 px-2 transform ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } transition-transform duration-200 ease-in-out`}
       >

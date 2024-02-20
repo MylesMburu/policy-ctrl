@@ -63,7 +63,7 @@ export default function DocumentRepo() {
     <div className="container">
     {/* Maps and charts */}
       <div className="flex m-2">
-        <div className="flex-2 w-3/5 shadow-lg">
+        <div className="flex-2 w-3/5 shadow-lg z-0">
           <div className="flex">
             <h4 className=" font-bold ">Geographical Distribution</h4>
             <div className="ml-auto mr-3 mb-2" >
