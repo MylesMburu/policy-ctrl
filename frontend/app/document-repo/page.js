@@ -4,11 +4,22 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { MdDriveFolderUpload } from "react-icons/md";
 
+//auth
+import {Options} from '@/app/api/auth/[...nextauth]/providers';
+import {getServerSession} from "next-auth/next";
+import {redirect} from "next/navigation"
+
 import Drawer from "@/components/Drawer";
 import Documents from "@/components/Documents";
 
 
-export default function DocumentRepo() {
+export default async function DocumentRepo() {
+  const session = await getServerSession(Options)
+
+  if(!session){
+    redirect('/api/auth/signin?callbackUrl=/document-repo')
+  }
+  
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
   const [file, setFile] = useState(null);
@@ -105,7 +116,7 @@ export default function DocumentRepo() {
       </form>
       <div className="grid grid-cols-1 gap-4">
           {documents.map((document) => (
-            <div key={document._id} className="bg-gray-100 p-4 rounded shadow mx-24"> {/* Use _id for the key if it's MongoDB's default */}
+            <div key={document._id} className="bg-gray-100 p-4 rounded shadow mx-24"> 
               <h3 className="font-semibold text-black">{document.title}</h3>
               <p className="text-sm text-gray-500">Category: {document.category}</p>
               <p className="text-sm text-gray-500">Uploaded on {new Date(document.uploadedAt).toLocaleDateString()}</p>
