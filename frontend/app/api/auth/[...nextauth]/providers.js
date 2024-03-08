@@ -18,7 +18,7 @@ export const Options = {
                 }
             },
 
-            async authorize(credentials, req){
+            async authorize(credentials){
                 const user = { id:"1", name:"admin", password:"admin" }
 
                 if (credentials?.username === user.name && credentials?.password === user.password){

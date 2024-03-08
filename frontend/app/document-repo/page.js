@@ -3,28 +3,27 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { MdDriveFolderUpload } from "react-icons/md";
+import { useSession } from "next-auth/react"
 
-//auth
-import {Options} from '@/app/api/auth/[...nextauth]/providers';
-import {getServerSession} from "next-auth/next";
-import {redirect} from "next/navigation"
 
 import Drawer from "@/components/Drawer";
 import Documents from "@/components/Documents";
 
 
-export default async function DocumentRepo() {
-  const session = await getServerSession(Options)
-
-  if(!session){
-    redirect('/api/auth/signin?callbackUrl=/document-repo')
-  }
-  
+export default function DocumentRepo() {
+    
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
   const [file, setFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [documents, setDocuments] = useState([]);
+  const { status } = useSession({
+    required: true,
+  })
+
+  if (status === "loading") {
+    return "Loading ..."
+  }
 
   useEffect(() => {
     // Fetch documents when component mounts
@@ -98,9 +97,8 @@ export default async function DocumentRepo() {
           className="text-center text-black border-2 border-gray-300 rounded w-64 p-2 mb-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
           >
           <option value="0">Select category</option>
-          <option value="1">Category 1</option>
-          <option value="2">Category 2</option>
-          <option value="3">Category 3</option>
+          <option value="1">LAWS AND POLICIES</option>
+          <option value="2">INTERNATIONAL AGREEMENTS</option>
           </select>
 
 
