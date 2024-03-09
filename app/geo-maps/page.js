@@ -59,7 +59,7 @@ const options = {
 };
 
 // const center =[10.771278605629783, 106.69012489341263];
-export default function page() {
+export default function Page() {
   return (
     
       <Drawer>
