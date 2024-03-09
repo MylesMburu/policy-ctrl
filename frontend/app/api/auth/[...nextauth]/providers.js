@@ -21,6 +21,8 @@ export const Options = {
             async authorize(credentials){
                 const user = { id:"1", name:"admin", password:"admin" }
 
+                console.log(credentials);
+
                 if (credentials?.username === user.name && credentials?.password === user.password){
                     return user;
                 }
