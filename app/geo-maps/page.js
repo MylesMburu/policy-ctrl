@@ -1,15 +1,26 @@
 'use client'
 
+import dynamic from 'next/dynamic';
 import Drawer from "@/components/Drawer";
-import {MapContainer, TileLayer}from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import{ Bar, Line} from 'react-chartjs-2';
+import { Bar, Line } from 'react-chartjs-2';
 import { Chart } from 'chart.js/auto';
-Chart.register({ // Register linear scale
+
+Chart.register({
   id: 'linear',
   type: 'linear',
-  position: 'left', // 'left' for vertical axis, 'bottom' for horizontal axis
+  position: 'left',
 });
+
+const MapContainer = dynamic(
+  () => import('react-leaflet').then((mod) => mod.MapContainer),
+  { ssr: false }
+);
+
+const TileLayer = dynamic(
+  () => import('react-leaflet').then((mod) => mod.TileLayer),
+  { ssr: false }
+);
 const center =[10.771278605629783, 106.69012489341263];
 const data = {
   labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
