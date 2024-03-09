@@ -43,18 +43,15 @@ const options = {
   scales: {
     y: {
       beginAtZero: true,
+      grid: {
+        display: false // Remove y-axis grid lines
+    }
     },
     x: {
       grid: {
           display: false // Remove x-axis grid lines
       }
-  },
-  y: {
-      grid: {
-          display: false // Remove y-axis grid lines
-      }
-  }
-    
+  },    
   },
 };
 
@@ -70,7 +67,7 @@ export default function Page() {
           <div className="flex">
             <h4 className=" font-bold ">Geographical Distribution</h4>
             <div className="ml-auto mr-3 mb-2" >
-              <select class="px-2 py-1 border-solid border-blue-600 border-2 rounded-full">
+              <select className="px-2 py-1 border-solid border-blue-600 border-2 rounded-full">
                 <option>select country</option>
               </select>
             </div>
