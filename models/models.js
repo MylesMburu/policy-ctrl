@@ -21,4 +21,23 @@ const UserSchema = new mongoose.Schema({
     timestamps: true,
 });
 
+
+const ForumSchema = new mongoose.Schema({
+    creator: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    },
+    title: {
+        type: String,
+        required: true,
+    },
+    content: {
+        type: String,
+        required: true,
+    },
+});
+
+
 const UserModel = mongoose.model('User', UserSchema);
+const ForumModel = mongoose.model('Forum', ForumSchema);
