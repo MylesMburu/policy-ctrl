@@ -2,6 +2,8 @@
 
 import { useEffect } from "react";
 import Image from "next/image"
+import Drawer from "@/components/Drawer";
+
 import forum_bg from "@/public/forum-bg.jpg";
 
 export default function Community(){
@@ -9,6 +11,7 @@ export default function Community(){
 
     })
     return(
+        <Drawer>
         <div>
             <div className="relative">
                 <Image 
@@ -25,4 +28,5 @@ export default function Community(){
 
             </div>
         </div>
+        </Drawer>
     )}

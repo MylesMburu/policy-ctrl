@@ -27,8 +27,8 @@ export default function Drawer({ children }) {
             Document Repo
         </Link>
 
-        <Link href="/dashboard" className="block" >
-            Dashboard
+        <Link href="/community-forum" className="block" >
+            Community
         </Link>
 
         <Link href="/dashboard" className="block" >
