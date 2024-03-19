@@ -23,7 +23,7 @@ export default function DocumentRepo() {
 
   const fetchDocuments = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/documents');
+      const response = await axios.get('http://34.205.18.170:3001/documents');
       setDocuments(response.data);
     } catch (error) {
       console.error(error);
@@ -46,7 +46,7 @@ export default function DocumentRepo() {
     setIsLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:3001/upload-document', formData, {
+      const response = await axios.post('http://34.205.18.170:3001/upload-document', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
