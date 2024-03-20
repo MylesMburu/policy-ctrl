@@ -3,6 +3,9 @@ import { formatDistanceToNow } from 'date-fns';
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 
+import logo from '@/public/logo.png';
+import Image from 'next/image';
+
 export default function PostCard({ post, onDelete, onUpdate }) {
   return (
     <div className="border rounded-lg p-4 my-2 bg-white shadow-sm text-black">
@@ -19,6 +22,16 @@ export default function PostCard({ post, onDelete, onUpdate }) {
         </div>
       </div>
       <h3 className="font-bold mb-2">{post.title}</h3>
+      
+    
+        <Image 
+          src={logo} 
+          height={100}
+          width={100}
+          alt="Uploaded by user"
+          className="my-2 w-full object-cover" // Adjust styles as needed
+        />
+ 
       <p>{post.content}</p>
       <div className="flex justify-between items-center mt-4">
         {/* Conditional rendering based on user's ability to edit/delete */}
