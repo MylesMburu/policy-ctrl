@@ -36,3 +36,7 @@ body {
 .glassmorphism {
   @apply rounded-xl border border-gray-200 bg-white/20 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur p-5;
 }
+
+.card{
+  @apply flex flex-col justify-center items-center mt-8 rounded overflow-hidden shadow-lg relative px-6 py-2 bg-green-700 text-white text-center;
+}

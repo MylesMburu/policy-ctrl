@@ -1,14 +1,14 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-import logo from '@/public/logo.jpg';
-import logo1 from '@/public/logo1.jpg';
+import logo from '@/public/logo.svg';
+import logo1 from '@/public/logo1.svg';
 
 export default function Home() {
   return (
-    <div className="bg-white text-black">
+    <div className="bg-yellow-50 text-black">
       {/* Navigation Bar */}
-      <nav className="bg-gray-100 border-b border-gray-200">
+      <nav className="bg-white border-b border-gray-200 text-black">
         <div className="container mx-auto flex justify-between items-center p-4">
           {/* Logo */}
           <div>
@@ -56,13 +56,22 @@ export default function Home() {
 
         {/* Key Features */}
         <div className="mb-4">
-          <h3 className="text-lg font-bold mb-2">Key Features</h3>
-          <ul className="list-disc list-inside">
-            <li>Comprehensive Data Analysis: Leverage cutting-edge technology and AI capabilities to analyze complex climate data and identify actionable insights.</li>
-            <li>Community Forum: Foster collaboration and knowledge sharing among governments, NGOs, businesses, and communities to drive collective action.</li>
-            <li>Policy Recommendations: Receive personalized policy recommendations based on data-driven analysis to inform evidence-based decision-making.</li>
-          </ul>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-auto md:h-64 bg-secondary text-text1 pb-6">
+            <div className="card">
+                <h5 className='font-bold border-b-2'>Comprehensive Data Analysis</h5>
+                <p>Leverage cutting-edge technology and AI capabilities to analyze complex climate data and identify actionable insights.</p>
+            </div>
+            <div className="card">
+                <h5 className='font-bold border-b-2'>Community Forum</h5>
+                <p>Foster collaboration and knowledge sharing among governments, NGOs, businesses, and communities to drive collective action.</p>
+            </div>
+            <div className="card">
+                <h5 className='font-bold border-b-2'>Policy Recommendations</h5>
+                <p>Receive personalized policy recommendations based on data-driven analysis to inform evidence-based decision-making.</p>
+            </div>
+          </div>
         </div>
+
 
         {/* Social Media Icons */}
         {/* Placeholder for your social media icons */}
