@@ -1,35 +1,45 @@
 'use client';
 
-import { useState } from "react"
-
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { FiMenu, FiX } from 'react-icons/fi';
 
 import logo1 from '@/public/logo1.svg';
 
-
 export const Nav = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div>
-        <nav className="bg-white border-b border-gray-200 text-black top-0">
+      <nav className="bg-white border-b border-gray-200 text-black top-0">
         <div className="container mx-auto flex justify-between items-center p-4">
           {/* Logo */}
-          <div>
+          {!isOpen && (
             <Link href="/">
-              <Image src={logo1} alt="Policy CTRL Logo" width={100} height={100} />
+              <Image src={logo1} alt="Policy CTRL Logo" width={100} height={100} style={{ cursor: 'pointer' }} />
             </Link>
+          )}
+
+          {/* Menu Toggle Icon */}
+          <div className="md:hidden">
+            {isOpen ? (
+              <FiX className="text-black cursor-pointer mb-24" onClick={() => setIsOpen(false)} />
+            ) : (
+              <FiMenu className="text-black cursor-pointer" onClick={() => setIsOpen(true)} />
+            )}
           </div>
 
           {/* Navigation Links */}
-          <ul className="flex gap-4">
-            <li><Link href="/about" className="hover:text-blue-500">About Us</Link></li>
-            <li><Link href="/features" className="hover:text-blue-500">Features</Link></li>
-            <li><Link href="/pricing" className="hover:text-blue-500">Pricing</Link></li>
-            <li><Link href="/blog" className="hover:text-blue-500">Blog</Link></li>
-            <li><Link href="/contact" className="hover:text-blue-500">Contact Us</Link></li>
+          <ul className={`md:flex ${isOpen ? 'flex flex-col mr-24 gap-2 ' : 'hidden'} md:flex-row gap-4`}>
+            <li><Link href="/about"><span className="hover:text-blue-500" onClick={() => setIsOpen(false)}>About Us</span></Link></li>
+            <li><Link href="/features"><span className="hover:text-blue-500" onClick={() => setIsOpen(false)}>Features</span></Link></li>
+            <li><Link href="/pricing"><span className="hover:text-blue-500" onClick={() => setIsOpen(false)}>Pricing</span></Link></li>
+            <li><Link href="/blog"><span className="hover:text-blue-500" onClick={() => setIsOpen(false)}>Blog</span></Link></li>
+            <li><Link href="/contact"><span className="hover:text-blue-500" onClick={() => setIsOpen(false)}>Contact Us</span></Link></li>
           </ul>
         </div>
       </nav>
     </div>
-  )
-}
+  );
+};
