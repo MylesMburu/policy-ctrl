@@ -1,32 +1,15 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
+import { Nav } from '@/components/Nav';
+
 import logo from '@/public/logo.svg';
-import logo1 from '@/public/logo1.svg';
 
 export default function Home() {
   return (
     <div className="bg-yellow-50 text-black">
       {/* Navigation Bar */}
-      <nav className="bg-white border-b border-gray-200 text-black">
-        <div className="container mx-auto flex justify-between items-center p-4">
-          {/* Logo */}
-          <div>
-            <Link href="/">
-              <Image src={logo1} alt="Policy CTRL Logo" width={100} height={100} />
-            </Link>
-          </div>
-
-          {/* Navigation Links */}
-          <ul className="flex gap-4">
-            <li><Link href="/about" className="hover:text-blue-500">About Us</Link></li>
-            <li><Link href="/features" className="hover:text-blue-500">Features</Link></li>
-            <li><Link href="/pricing" className="hover:text-blue-500">Pricing</Link></li>
-            <li><Link href="/blog" className="hover:text-blue-500">Blog</Link></li>
-            <li><Link href="/contact" className="hover:text-blue-500">Contact Us</Link></li>
-          </ul>
-        </div>
-      </nav>
+      <Nav />
 
       {/* Header Section */}
       <div className="flex flex-col items-center justify-center min-h-screen pb-32">
