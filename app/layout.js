@@ -11,19 +11,18 @@ export default function RootLayout({ children }) {
       <Head>
         {/* Primary Meta Tags */}
         <title>POLICY CTRL</title>
-        <meta name="title" content="POLICY CTRL" />
         <meta name="description" content="Empowering Climate Action through Data-Driven Policy Solutions. Policy Ctrl is a groundbreaking platform that bridges the gap between climate policies and technology." />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://metatags.io/" />
+        <meta property="og:url" content="https://policy-ctrl.vercel.app/" />
         <meta property="og:title" content="POLICY CTRL" />
         <meta property="og:description" content="Empowering Climate Action through Data-Driven Policy Solutions. Policy Ctrl is a groundbreaking platform that bridges the gap between climate policies and technology." />
         <meta property="og:image" content={logo} />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://metatags.io/" />
+        <meta property="twitter:url" content="https://policy-ctrl.vercel.app/" />
         <meta property="twitter:title" content="POLICY CTRL" />
         <meta property="twitter:description" content="Empowering Climate Action through Data-Driven Policy Solutions. Policy Ctrl is a groundbreaking platform that bridges the gap between climate policies and technology." />
         <meta property="twitter:image" content={logo} />
