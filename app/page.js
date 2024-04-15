@@ -1,34 +1,20 @@
+'use client'
 import Link from 'next/link';
 import Image from 'next/image';
 
 import { Nav } from '@/components/Nav';
 
 import logo from '@/public/logo.svg';
+import { Header } from '@/components/Header';
+
 
 export default function Home() {
   return (
     <div className="bg-yellow-50 text-black">
-      {/* Navigation Bar */}
       <Nav />
 
-      {/* Header Section */}
-      <div className="flex flex-col items-center justify-center min-h-screen pb-32">
-        <div className="text-center p-4">
-          {/* Headline and Subheadline */}
-          <div className="flex justify-center items-center mx-auto">
-          <Image src={logo} alt="Policy CTRL Logo" width={500} height={500} />
-          </div>
+      <Header/>
 
-          <h1 className="text-2xl font-bold mb-2">Empowering Climate Action through Data-Driven Policy Solutions</h1>
-          <p className="text-lg mb-4">Unlock Insights, Drive Change, Build Resilience</p>
-
-          {/* CTA Button */}
-          <Link href="/geo-maps" className="bg-blue-500 text-white text-lg font-medium px-6 py-2 rounded shadow hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
-            Get Started
-          </Link>
-
-        </div>
-      </div>
 
       {/* Main Section */}
       <div className="container mx-auto p-4">
